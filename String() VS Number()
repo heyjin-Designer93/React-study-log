@@ -1,0 +1,7 @@
+# String()은 숫자·문자열·null·undefined 등 일반적인 값을 넣으면 실패 없이 문자열로 바꿔 준다
+→ 단, 실패가 없다는 건 장점이자 단점: 잘못된 값(undefined)도 “undefined”로 조용히 바뀌어 실수를 못 잡는다
+→ 그래서 String()은 타입 맞추기용일 뿐, 속성 이름 실수 같은 버그는 직접 확인해야 한다
+
+# Number()는 변환 실패 시 NaN [MDN]
+→ Number(“abc”) → NaN
+→ NaN은 자기 자신과도 같지 않음 (NaN === NaN 은 false)
