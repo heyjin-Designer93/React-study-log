@@ -1,0 +1,15 @@
+# useReducer
+이벤트 함수 안에서 호출된 모든 dispatch의 action은 React의 대기열에 순서대로 저장된다.
+이벤트 함수가 끝나면 React가 해당 컴포넌트 함수를 다시 호출한다(리렌더링, 1번).
+리렌더링 중 useReducer 줄이 실행될 때, React가 대기열의 action을 순서대로 꺼내 reducer(state, action)를 실행한다.
+첫 번째 reducer 호출의 state는 React에 저장돼 있던 현재 state이고, 그다음부터는 직전 reducer의 반환값이 state 매개변수로 전달된다.
+마지막 반환값이 새 state로 React에 저장되고, useReducer가 그 값을 반환해 구조 분해 할당으로 변수(count)에 한 번 들어간다.
+(값이 여러 번 바뀌는 곳은 React 내부 저장 공간이고, count 상수는 컴포넌트 함수 안에 있는 별개의 변수다. 그래서 React 내부에서 최종값이 결정된 뒤 count에는 한 번만 할당된다. 다음 렌더링의 count는 함수가 다시 호출되며 새로 만들어진 상수이므로 재할당이 아니다.)
+비교: useState에서 setCount(값)처럼 값을 넘기면 이벤트 함수 안에서 스냅샷 기준으로 이미 계산된 값이 대기열에 들어간다.
+반면 dispatch는 계산 전 요청(action)을 넘기고, 실제 계산은 reducer가 최신 state로 한다.
+(useState도 setCount(prev => prev + 1)처럼 함수를 넘기면 계산 전 요청을 넘기는 셈이라 reducer처럼 최신 값으로 계산된다.)
+
+-useState(값 전달) 대기열: [1, 1]
+→ 이미 계산된 값이라 순서대로 교체만 함 → 1
+useReducer 대기열: [INCREASE, INCREASE]
+→ 처리할 때 직전 결과를 state로 넣어 계산 → 2
