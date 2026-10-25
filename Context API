@@ -20,6 +20,11 @@ useContext도 "리액트가 제공하는 API 중 하나
 → 끝까지 못 찾으면: createContext()에 넣은 기본값 사용 
 → ex) createContext([]) > 이 공유객체에서 useContext 하 [] 빈 배열이 꺼내짐 
 
+
+$$$$$$여기서 부터 메모 읽고 정리 후
+$$$$$$ 전체 메모 ai 정리해서 붙여넣고
+$$$$$$이제 Q4!감정일기에서 DiaryStateContext(data)와 DiaryDispatchContext(onCreate, onUpdate, onDelete)로 나눈 이유는 뭘까요? 이질문부터 다시 이어가기
+
 # JSX 속성(prop) vs HTML 속성(attribute)
 [확실한 사실]
 JSX에서는 태그 종류와 상관없이 일단 모든 속성이 props 객체의 "키: 값"이 돼요. 그다음 처리가 태그 종류에 따라 갈려요.
