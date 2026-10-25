@@ -12,11 +12,40 @@ useContext도 "리액트가 제공하는 API 중 하나
 # 리액트 19부터 .Provider 없이 <DiaryStateContext value={data}>처럼 Context 자체를 공급자로 쓸 수 있음 
 기존 .Provider 방식도 아직 동작
 
-# 일반 컴포넌트: 이름만 다르면 여러 개 OK, 같은 이름 두 번은 X
-→ Provider: 공유되는 건 value 하나뿐 → 여러 값은 value={{ data, data2 }}처럼 객체로 묶기
+# 일반 컴포넌트: 이름만 다르면 여러 개 속성(키) OK, 같은 이름 속성(키) 두 번은 X
+→ Provider: 공유되는 건 value 속성(키) 하나뿐 → 여러 값은 value={{ data, data2 }}처럼 객체로 묶기
 
 # useContext는 자기 위쪽으로 올라가면서 가장 가까운 Provider를 찾음
 → 찾으면: 그 Provider의 value 사용
 → 끝까지 못 찾으면: createContext()에 넣은 기본값 사용 
 → ex) createContext([]) > 이 공유객체에서 useContext 하 [] 빈 배열이 꺼내짐 
+
+# JSX 속성(prop) vs HTML 속성(attribute)
+[확실한 사실]
+JSX에서는 태그 종류와 상관없이 일단 모든 속성이 props 객체의 "키: 값"이 돼요. 그다음 처리가 태그 종류에 따라 갈려요.
+(근거: 리액트 공식 문서 “Passing Props to a Component” — <img>처럼 기본 태그에 넘기는 props는 미리 정해져 있고, 직접 만든 컴포넌트에는 원하는 어떤 props든 넘길 수 있다고 설명)
+
+① 소문자 기본 태그 (div, input, img...)
+
+<div className="box">안녕</div> → jsx("div", { className: "box", children: "안녕" }) → 리액트가 이 키를 보고 실제 HTML 속성으로 바꿔서 화면에 반영 → 브라우저 HTML: <div class="box">안녕</div>
+
+이건 HTML 속성과 거의 같아요. 다만 JSX식 이름 규칙이 있어요.
+→ class → className
+→ onclick → onClick (카멜케이스)
+→ style="color:red" → style={{ color: “red” }} (객체)
+
+② 대문자 컴포넌트 (DiaryList, Home, DiaryStateContext.Provider...)
+<DiaryList data={data} />
+→ jsx(DiaryList, { data: data })
+→ HTML 속성으로 바뀌지 않고, props 객체 그대로 DiaryList 함수에 전달
+→ 브라우저 HTML 어디에도 data라는 속성은 안 보임
+
+즉 컴포넌트에 쓰는 속성은 HTML과 전혀 상관없는 "함수에 넘기는 객체의 키"예요. 그래서 이름도 마음대로 정할 수 있고, 받는 쪽은 그 키 이름으로 찾아 꺼내는 거예요.
+
+▶ 정리
+→ 기본 태그 속성: 키가 HTML 속성으로 변환됨 → 이름이 정해져 있음
+→ 컴포넌트 속성: 키가 함수의 props 객체로 전달됨 → 이름을 내가 정함
+→ Provider: 컴포넌트지만 리액트가 만든 것이라, 공유용 키 이름이 value로 정해져 있음
+
+
  
