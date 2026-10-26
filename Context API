@@ -20,9 +20,6 @@ useContext도 "리액트가 제공하는 API 중 하나
 → 끝까지 못 찾으면: createContext()에 넣은 기본값 사용 
 → ex) createContext([]) > 이 공유객체에서 useContext 하 [] 빈 배열이 꺼내짐 
 
-
-$$$$$$여기서 부터 메모 읽고 정리 후
-$$$$$$ 전체 메모 ai 정리해서 붙여넣고
-$$$$$$이제 Q4!감정일기에서 DiaryStateContext(data)와 DiaryDispatchContext(onCreate, onUpdate, onDelete)로 나눈 이유는 뭘까요? 이질문부터 다시 이어가기
-
+# Context로 공유한 value의 값이 변경되면 그 값을 공유 받는 컴포넌트에 
+memo로 최적화 했어도 context의 value변경으로 리랜더링  
 
