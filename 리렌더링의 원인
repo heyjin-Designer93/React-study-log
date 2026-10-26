@@ -1,0 +1,5 @@
+리렌더링 원인은 딱 세 가지예요. (앞에서 정리한 것)
+① 자기 state 변경 
+② 부모 리렌더링 
+③ Context value가 바뀌면, Provider 안에 "있는" 컴포넌트가 아니라 
+  그 Context를 useContext로  "읽는" 컴포넌트만 리렌더링된다.
