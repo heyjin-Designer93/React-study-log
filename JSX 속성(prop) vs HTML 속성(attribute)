@@ -1,0 +1,6 @@
+# JSX 속성(prop) vs HTML 속성(attribute)
+- 리액트는 jsx 태그 이름이 소문자,대문자냐에 따라 처리 방식이 다름
+- 컴포넌트 이름은 반드시 대문자로 시작해야 하고, 소문자로 시작하면 HTML 태그로 취급
+- 소문자 시작 (div, input) → “HTML 태그로 취급” → props 키를 HTML 속성으로 바꿔 화면에 반영
+- 대문자 시작 (DiaryList, Home) → "컴포넌트로 취급" → props 객체를 그 함수에 그대로 전달
+- Provider: 컴포넌트지만 리액트가 만든 것이라, 공유용 키 이름이 value로 정해져 있음
